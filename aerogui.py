@@ -5,9 +5,13 @@ if os.path.isfile("aerogui_config.py"):
   import aerogui_config
   sleeptime = aerogui_config.sleeptime
   reconnectfile = aerogui_config.reconnect
+  oddolu = aerogui_config.oddolu
+  odprawej = aerogui_config.odprawej
 else:
   sleeptime = 30
-  reconnectcommand = "sh reconnect.sh"
+  reconnectcommand = "android-reconnect\\adb shell < android-reconnect\\reconnect.adb"
+  oddolu = 100
+  odprawej = 30
   
 def czas():
   return("[" + str(datetime.datetime.now().time())[0:-7]+ "] ")
@@ -20,17 +24,17 @@ def getsessid():
 def reconnect():
   print czas() + "Restartowanie polaczenia"
   os.system(reconnectfile)
+  print czas() + "Zakonczono restartowanie polaczenia, oczekiwanie 60 sekund"
   time.sleep(60)
 
 def okno(info="nope"):
   root = Tk()
   root.title('Captcha Aero2')
   root.resizable(0, 0)
-  img1 = PIL.Image.open(StringIO.StringIO(urllib2.urlopen("http://10.2.37.78:8080/getCaptcha.html?PHPSESSID=" + sessid).read()))
-  root.geometry('%dx%d' % (img1.size[0],img1.size[1]+30))
-  tkimg = ImageTk.PhotoImage(img1)
+  root.geometry('300x120+%d+%d' % (root.winfo_screenwidth()-300-odprawej, root.winfo_screenheight()-120-oddolu))
+  tkimg = ImageTk.PhotoImage(PIL.Image.open(StringIO.StringIO(urllib2.urlopen("http://10.2.37.78:8080/getCaptcha.html?PHPSESSID=" + sessid).read())))
   label_image = Label(root, image=tkimg)
-  label_image.place(x=0,y=0,width=img1.size[0],height=img1.size[1])
+  label_image.place(x=0,y=0,width=300,height=90)
   
   if info!="nope":
     info = Label(root, text=info, bg='white')
@@ -69,7 +73,7 @@ def okno(info="nope"):
     reconnect()
   else:
     print czas() + "Zle wpisana captcha lub inny blad"
-    okno("Zle wpisana captcha, wpisz ponownie")
+    okno("Zle wpisana captcha lub blad, wpisz ponownie")
 
 print czas() + "Od teraz sprawdzanie czy wymagana jest captcha bedzie sie odbywac co " + str(sleeptime) + " sekund"
 
