@@ -1,5 +1,6 @@
-import sys, re, urllib2, urllib, httplib, PIL.Image, ImageTk, StringIO, time, os, datetime
+import sys, re, urllib2, urllib, httplib, StringIO, time, os, datetime
 from Tkinter import *
+from PIL import ImageTk, Image
 
 if os.path.isfile("aerogui_config.py"):
   import aerogui_config
@@ -32,7 +33,7 @@ def okno(info="nope"):
   root.title('Captcha Aero2')
   root.resizable(0, 0)
   root.geometry('300x120+%d+%d' % (root.winfo_screenwidth()-300-odprawej, root.winfo_screenheight()-120-oddolu))
-  tkimg = ImageTk.PhotoImage(PIL.Image.open(StringIO.StringIO(urllib2.urlopen("http://10.2.37.78:8080/getCaptcha.html?PHPSESSID=" + sessid).read())))
+  tkimg = ImageTk.PhotoImage(Image.open(StringIO.StringIO(urllib2.urlopen("http://10.2.37.78:8080/getCaptcha.html?PHPSESSID=" + sessid).read())))
   label_image = Label(root, image=tkimg)
   label_image.place(x=0,y=0,width=300,height=90)
   
