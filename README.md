@@ -13,7 +13,7 @@ Wystarczy napisać odpowiedni skrypt :)
 ###Wymagania:
 - Oczywiście python (pisane pod wersje 2.7) - Ubuntu `sudo apt-get install python`, Windows `https://www.python.org/downloads/windows/`
 - Tkinter (domyślnie zainstalowany w Windows, w Ubuntu wydajemy polecenie `sudo apt-get install python-tk python-pmw`)
-- PIL (w windows polecam pobrać Pillow - fork PIL'a, w Ubuntu wydajemy polecenie: `sudo apt-get install python-imaging python-imaging-tk`)
+- PIL (w windows polecam pobrać Pillow - fork PIL'a `https://pypi.python.org/pypi/Pillow/2.5.1#downloads`, w Ubuntu wydajemy polecenie: `sudo apt-get install python-imaging python-imaging-tk`)
 
 ###Screenshoty
 ![Screenshot#1](https://raw.githubusercontent.com/JuniorJPDJ/aerogui/master/screenshots/aero.png)
