@@ -9,7 +9,7 @@ if os.path.isfile("aerogui_config.py"):
   oddolu = aerogui_config.oddolu
   odprawej = aerogui_config.odprawej
 else:
-  sleeptime = 30
+  sleeptime = 5
   reconnectcommand = "android-reconnect\\adb shell < android-reconnect\\reconnect.adb"
   oddolu = 100
   odprawej = 30
@@ -63,6 +63,8 @@ def okno(info="nope"):
   textFrame.pack(side = BOTTOM)
 
   root.protocol('WM_DELETE_WINDOW', sys.exit)
+  root.lift()
+  root.focus_force()
 
   root.mainloop()
 
@@ -80,13 +82,16 @@ print czas() + "Od teraz sprawdzanie czy wymagana jest captcha bedzie sie odbywa
 
 while 1:
   print czas() + "Sprawdzanie czy wymagana jest captcha"
-  con = httplib.HTTPConnection("google.com")
-  con.request("GET", "")
-  res = con.getresponse()
-  if(res.status == 302) and (res.getheader('Location') == "http://bdi.free.aero2.net.pl:8080/"):
-    print czas() + "Wykryto wymaganie captchy"
-    getsessid()
-    okno()
-  else:
-    print czas() + "Captcha nie jest narazie wymagana"
+  try:
+    con = httplib.HTTPConnection("google.com")
+    con.request("GET", "")
+    res = con.getresponse()
+    if(res.status == 302) and (res.getheader('Location') == "http://bdi.free.aero2.net.pl:8080/"):
+      print czas() + "Wykryto wymaganie captchy"
+      getsessid()
+      okno()
+    else:
+      print czas() + "Captcha nie jest narazie wymagana"
+  except Exception, e:
+      print czas() + "Blad pobierania informacji o captcha: " + str(e)
   time.sleep(sleeptime)
