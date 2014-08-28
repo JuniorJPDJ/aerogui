@@ -48,6 +48,7 @@ def okno(info="nope"):
 
   cap = Entry(textFrame, width=10)
   cap.pack(side = LEFT)
+  cap.focus()
 
   def sub(*args):
     global wpisana
