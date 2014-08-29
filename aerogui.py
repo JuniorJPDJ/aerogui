@@ -48,7 +48,6 @@ def okno(info="nope"):
 
   cap = Entry(textFrame, width=10)
   cap.pack(side = LEFT)
-  cap.focus()
 
   def sub(*args):
     global wpisana
@@ -65,7 +64,8 @@ def okno(info="nope"):
 
   root.protocol('WM_DELETE_WINDOW', sys.exit)
   root.lift()
-  root.focus_force()
+  root.wm_attributes("-topmost", 1)
+  cap.focus_force()
 
   root.mainloop()
 
