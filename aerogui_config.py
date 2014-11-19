@@ -1,7 +1,8 @@
 #nazwa komendy sluzacej do ponownego polaczenia aero
-reconnect = "android-reconnect\\adb shell < android-reconnect\\reconnect.adb"
+#reconnect = "reconnects\\android-flightmode\\adb shell < reconnects\\android-flightmode\\reconnect.adb"
+reconnect = "reconnects\\windows-rasdial\\rasdial.bat"
 #czas co jaki ma byc sprawdzane czy jest juz captcha (sekundy)
-sleeptime = 5
+sleeptime = 3
 #odleglosc okna captchy od dolnej krawedzi ekranu
 oddolu = 100
 #odleglosc okna captchy od prawej krawedzi ekranu

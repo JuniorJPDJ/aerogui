@@ -25,8 +25,7 @@ def getsessid():
 def reconnect():
   print czas() + "Restartowanie polaczenia"
   os.system(reconnectfile)
-  print czas() + "Zakonczono restartowanie polaczenia, oczekiwanie 60 sekund"
-  time.sleep(60)
+  print czas() + "Zakonczono restartowanie polaczenia"
 
 def okno(info="nope"):
   root = Tk()
@@ -75,6 +74,7 @@ def okno(info="nope"):
   if (wynik.find("prawid") > -1) or (wynik.find(" z Internetem.") > -1):
     print czas() + "Captcha prawidlowa"
     reconnect()
+    time.sleep(300)
   else:
     print czas() + "Zle wpisana captcha lub inny blad"
     okno("Zle wpisana captcha lub blad, wpisz ponownie")
@@ -82,7 +82,7 @@ def okno(info="nope"):
 print czas() + "Od teraz sprawdzanie czy wymagana jest captcha bedzie sie odbywac co " + str(sleeptime) + " sekund"
 
 while 1:
-  print czas() + "Sprawdzanie czy wymagana jest captcha"
+  #print czas() + "Sprawdzanie czy wymagana jest captcha"
   try:
     con = httplib.HTTPConnection("google.com")
     con.request("GET", "")
@@ -91,8 +91,10 @@ while 1:
       print czas() + "Wykryto wymaganie captchy"
       getsessid()
       okno()
-    else:
-      print czas() + "Captcha nie jest narazie wymagana"
+    #else:
+      #print czas() + "Captcha nie jest narazie wymagana"
   except Exception, e:
       print czas() + "Blad pobierania informacji o captcha: " + str(e)
+      print czas() + "Probuje polaczyc sie ponownie"
+      reconnect()
   time.sleep(sleeptime)
